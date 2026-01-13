@@ -104,7 +104,7 @@ def write_to_file(content, file_path):
 
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, 'new-form-rule-instance.xlsx')
+file_path = os.path.join(script_dir, 'new-form-rule-instance.xlsm')
 changesets, changeset_id = read_excel_and_generate_xml(file_path)
 output_file_path = f'{changeset_id}.xml'
 write_to_file(changesets, output_file_path)

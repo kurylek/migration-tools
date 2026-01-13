@@ -20,12 +20,12 @@ py -m pip install -r requirements.txt
 
 ## Usage
 
-1. Prepare your data in Excel file named `new_form_rule.xlsx`
+1. Prepare your data in Excel file named `new-form-rule.xlsm`
 2. Run the script:
-
-```bash
-py new_form_rule.py
-```
+    - ```bash
+        py new_form_rule.py
+        ```
+    - Macro in Excel file
 
 3. The script will generate an XML file
 

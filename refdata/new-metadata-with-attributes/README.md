@@ -2,7 +2,7 @@
 
 ## Description
 
-This script processes Excel files containing form rule instance definitions and generates corresponding XML files for Liquibase migration.
+This script processes Excel files containing codelist metadata definitions and generates corresponding XML files for Liquibase migration.
 
 ## Requirements
 
@@ -20,11 +20,11 @@ py -m pip install -r requirements.txt
 
 ## Usage
 
-1. Prepare your data in Excel file named `new-form-rule-instance.xlsm`
+1. Prepare your data in Excel file named `new-metadata-with-attributes.xlsm`
 2. Run the script:
    - ```bash
-      py new-form-rule-instance.py
-      ```
+       py new_metadata_with_attributes.py
+       ```
    - Macro in Excel file
 
 3. The script will generate an XML file

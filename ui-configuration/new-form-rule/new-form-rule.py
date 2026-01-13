@@ -34,7 +34,12 @@ def generate_exception_type_xml(rule_name, exception_type_cd):
         </insert>"""
     return xml_template
 
-def generate_parameter_xml(rule_name, parameter_name, data_type, required, parameter_type):
+def generate_parameter_xml(rule_name, parameter_name, data_type, required, parameter_type, parameter_comment):
+    if pd.isna(parameter_comment) or parameter_comment == "":
+        param_comment = '<column name="comment"/>'
+    else:
+        param_comment = f'<column name="comment" value="{parameter_comment}"/>'
+
     xml_template = f"""\n
         <insert tableName="c_form_rule_parameter">
             <column name="form_rule_cd" value="{rule_name}"/>
@@ -42,6 +47,7 @@ def generate_parameter_xml(rule_name, parameter_name, data_type, required, param
             <column name="form_rule_parameter_data_type_cl" value="{data_type}"/>
             <column name="required_sw" value="{required}"/>
             <column name="form_rule_parameter_type_cl" value="{parameter_type}"/>
+            {param_comment}
         </insert>"""
     return xml_template
 
@@ -78,8 +84,9 @@ def read_excel_and_generate_xml(file_path):
             data_type = row_data.iloc[1]
             required = row_data.iloc[2]
             parameter_type = row_data.iloc[3]
+            parameter_comment = row_data.iloc[4]
 
-            xml_output += generate_parameter_xml(rule_name, parameter_name, data_type, required, parameter_type)
+            xml_output += generate_parameter_xml(rule_name, parameter_name, data_type, required, parameter_type, parameter_comment)
 
     xml_output += "\n    </changeSet>"
 
@@ -100,7 +107,7 @@ def write_to_file(content, file_path):
 
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, 'new_form_rule.xlsx')
+file_path = os.path.join(script_dir, 'new-form-rule.xlsm')
 changesets, changeset_id = read_excel_and_generate_xml(file_path)
 output_file_path = f'{changeset_id}.xml'
 write_to_file(changesets, output_file_path)
